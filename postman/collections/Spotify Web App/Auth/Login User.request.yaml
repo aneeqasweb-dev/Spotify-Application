@@ -1,0 +1,16 @@
+$kind: http-request
+name: Login User
+order: 2000
+method: POST
+url: '{{baseUrl}}/api/auth/login'
+description: Login with username or email and password. Sets an HTTP-only JWT token cookie. Music upload and album creation require an artist account.
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "username": "johndoe",
+      "password": "password123"
+    }

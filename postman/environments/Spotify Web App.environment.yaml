@@ -1,0 +1,6 @@
+name: Spotify Web App
+values:
+  - key: baseUrl
+    value: 'http://localhost:3000'
+    enabled: true
+    description: Base URL for the API server

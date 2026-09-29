@@ -1,0 +1,16 @@
+$kind: http-request
+name: Create Album
+order: 2000
+method: POST
+url: '{{baseUrl}}/api/music/album'
+description: Log in as an artist on the same host first; Postman sends the token cookie automatically. Use No Auth in the Authorization tab. Replace musics with your uploaded music IDs.
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "title": "test_album_1",
+      "musics": ["6ab16a9c237911fdf2285539", "6ab16ce9237911fdf228553a"]
+    }

@@ -1,0 +1,18 @@
+$kind: http-request
+name: Register User
+order: 1000
+method: POST
+url: '{{baseUrl}}/api/auth/register'
+description: Register a new user. Role can be "user" or "artist".
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "username": "johndoe",
+      "email": "johndoe@example.com",
+      "password": "password123",
+      "role": "user"
+    }

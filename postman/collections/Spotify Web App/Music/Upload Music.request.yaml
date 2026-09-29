@@ -1,0 +1,17 @@
+$kind: http-request
+name: Upload Music
+order: 1000
+method: POST
+url: '{{baseUrl}}/api/music/upload'
+description: Upload a music file. Requires the user to be authenticated as an "artist" role. JWT token must be present in cookies (set after login).
+body:
+  type: formdata
+  content:
+    - key: music
+      type: file
+      src: /path/to/music-file.mp3
+      description: The music file to upload
+    - key: title
+      type: text
+      value: My Song
+      description: Title of the music track
