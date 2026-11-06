@@ -22,7 +22,9 @@ async function start() {
     checkSettings();
     await connectDB(); // exits with a clear message if MongoDB can't be reached
 
-    const server = app.listen(PORT, () => {
+    // Express 5 also calls this with an error if the port is busy — the 'error' handler below explains that case
+    const server = app.listen(PORT, (err) => {
+        if (err) return;
         console.log(`\n🎵 Beat Flow is running → http://localhost:${PORT}\n`);
     });
 

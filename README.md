@@ -8,8 +8,13 @@ release albums.
 
 ## Features
 
+**For visitors**
+- **Continue as guest** on the login page — try every feature without signing up (guest accounts delete themselves after 7 days)
+- Login page shows a live wall of album covers from the catalogue
+
 **Listening**
 - Home: quick picks, *Jump back in*, genre mixes *Made for you*, *Beat Flow picks*, new releases, trending songs, popular artists
+- Famous artists (Justin Bieber, Dua Lipa, BLACKPINK, BTS, CKay, Rema, The Weeknd…) as **official 30-second previews** with real artwork, marked *Preview*, with "Listen on Apple Music" for the full song
 - Player: play/pause, next/previous, shuffle, repeat (all / one), seek, volume, full-screen *Now playing* view
 - **Queue**: "Add to queue" plays songs next, then the album/playlist continues; queue side panel
 - Resumes the last song where you left off; lock-screen / media-key controls with cover art
@@ -79,6 +84,8 @@ has a request for every route.
 | POST | `/api/auth/login` | anyone | `{ username or email, password }` |
 | POST | `/api/auth/logout` | anyone | clears the cookie |
 | GET | `/api/auth/me` | logged in | the current user |
+| POST | `/api/auth/guest` | anyone | start a temporary guest account (logged in straight away) |
+| GET | `/api/public/highlights` | anyone | a few album covers + catalogue numbers for the login page |
 | GET | `/api/music?limit=&skip=` | logged in | songs, newest first (max 200) |
 | POST | `/api/music/upload` | artist | form-data: `music` (audio), `title`, optional `genre`, optional `cover` (image) |
 | PATCH | `/api/music/:id` | artist (owner) | `{ title?, genre? }` (+ optional `cover`) |
@@ -139,6 +146,10 @@ npm run backfill:covers -- --titles    # …and also use the title stored inside
 ```
 
 ## Music credits
+
+**Famous songs** (Justin Bieber, Dua Lipa, BLACKPINK…) are **30-second previews streamed directly from Apple
+Music** through Apple's public iTunes Search API, with their official artwork and a link to the full song.
+They are not downloaded or re-hosted, which keeps the app safe to show publicly.
 
 The demo catalogue (albums *Jazz*, *Medium Electronic*, *Funk and Blues*, *Disco and Lounge*,
 *Latin Sounds*, *Action*) is by **Kevin MacLeod (incompetech.com)**, licensed under
