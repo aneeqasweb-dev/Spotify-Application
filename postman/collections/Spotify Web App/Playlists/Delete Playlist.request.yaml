@@ -1,0 +1,6 @@
+$kind: http-request
+name: Delete Playlist
+order: 7000
+method: DELETE
+url: '{{baseUrl}}/api/playlists/{{playlistId}}'
+description: Owner only.

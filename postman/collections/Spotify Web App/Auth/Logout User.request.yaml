@@ -1,0 +1,6 @@
+$kind: http-request
+name: Logout User
+order: 4000
+method: POST
+url: '{{baseUrl}}/api/auth/logout'
+description: Clears the token cookie.

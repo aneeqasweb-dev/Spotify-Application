@@ -1,0 +1,16 @@
+$kind: http-request
+name: Update Playlist
+order: 4000
+method: PATCH
+url: '{{baseUrl}}/api/playlists/{{playlistId}}'
+description: Owner only.
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Road Trip 2026",
+      "description": "Updated description"
+    }

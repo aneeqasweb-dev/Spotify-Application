@@ -1,0 +1,6 @@
+$kind: http-request
+name: Remove Song From Playlist
+order: 6000
+method: DELETE
+url: '{{baseUrl}}/api/playlists/{{playlistId}}/tracks/{{trackId}}'
+description: Owner only.

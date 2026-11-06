@@ -1,0 +1,15 @@
+$kind: http-request
+name: Update Album
+order: 8000
+method: PATCH
+url: '{{baseUrl}}/api/music/albums/{{albumId}}'
+description: Artist only, your own albums.
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "title": "New album title"
+    }

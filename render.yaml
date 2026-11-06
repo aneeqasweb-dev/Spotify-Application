@@ -1,0 +1,22 @@
+# Render Blueprint: one web service that runs the Express API and serves the React app.
+# On render.com: New -> Blueprint -> pick this GitHub repo. Render asks you for the
+# values marked "sync: false" and generates a fresh JWT_SECRET for you.
+services:
+  - type: web
+    name: beat-flow
+    runtime: node
+    plan: free # "starter" = always on (no sleeping)
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGO_URI
+        sync: false
+      - key: IMAGEKIT_PRIVATE_KEY
+        sync: false

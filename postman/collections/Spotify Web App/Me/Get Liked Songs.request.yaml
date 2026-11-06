@@ -1,0 +1,6 @@
+$kind: http-request
+name: Get Liked Songs
+order: 1000
+method: GET
+url: '{{baseUrl}}/api/me/likes'
+description: Your Liked Songs, newest first.

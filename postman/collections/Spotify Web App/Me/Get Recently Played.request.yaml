@@ -1,0 +1,6 @@
+$kind: http-request
+name: Get Recently Played
+order: 4000
+method: GET
+url: '{{baseUrl}}/api/me/history'
+description: Songs you played recently (newest first, up to 30).

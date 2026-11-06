@@ -1,0 +1,6 @@
+$kind: http-request
+name: Unlike Song
+order: 3000
+method: DELETE
+url: '{{baseUrl}}/api/me/likes/{{trackId}}'
+description: Remove a song from Liked Songs.

@@ -1,0 +1,6 @@
+$kind: http-request
+name: Get All Music
+order: 3000
+method: GET
+url: '{{baseUrl}}/api/music?limit=50&skip=0'
+description: Songs, newest first. Includes coverUrl, duration, genre, plays and credits.

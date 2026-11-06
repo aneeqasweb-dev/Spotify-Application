@@ -1,0 +1,6 @@
+$kind: http-request
+name: Like Song
+order: 2000
+method: PUT
+url: '{{baseUrl}}/api/me/likes/{{trackId}}'
+description: Save a song to Liked Songs.

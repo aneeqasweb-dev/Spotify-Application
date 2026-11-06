@@ -1,0 +1,15 @@
+$kind: http-request
+name: Add Song To Playlist
+order: 5000
+method: POST
+url: '{{baseUrl}}/api/playlists/{{playlistId}}/tracks'
+description: Owner only. Returns 409 if the song is already in the playlist.
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "trackId": "{{trackId}}"
+    }

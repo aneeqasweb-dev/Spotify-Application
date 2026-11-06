@@ -1,0 +1,6 @@
+$kind: http-request
+name: Delete Album
+order: 9000
+method: DELETE
+url: '{{baseUrl}}/api/music/albums/{{albumId}}'
+description: Artist only, your own albums. The songs stay.

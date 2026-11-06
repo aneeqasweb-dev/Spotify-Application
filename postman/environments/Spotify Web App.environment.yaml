@@ -4,3 +4,15 @@ values:
     value: 'http://localhost:3000'
     enabled: true
     description: Base URL for the API server
+  - key: trackId
+    value: ''
+    enabled: true
+    description: A song id (copy one from Get All Music)
+  - key: albumId
+    value: ''
+    enabled: true
+    description: An album id (copy one from Get All Albums)
+  - key: playlistId
+    value: ''
+    enabled: true
+    description: A playlist id (copy one from Create Playlist)

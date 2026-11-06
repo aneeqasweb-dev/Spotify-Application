@@ -1,0 +1,6 @@
+$kind: http-request
+name: Record Play
+order: 5000
+method: POST
+url: '{{baseUrl}}/api/me/history/{{trackId}}'
+description: Counts a play and adds the song to Recently played. The app calls this after 10 seconds of listening.

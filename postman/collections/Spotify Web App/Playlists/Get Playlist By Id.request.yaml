@@ -1,0 +1,6 @@
+$kind: http-request
+name: Get Playlist By Id
+order: 3000
+method: GET
+url: '{{baseUrl}}/api/playlists/{{playlistId}}'
+description: One playlist with its songs.

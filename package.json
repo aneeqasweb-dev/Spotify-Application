@@ -1,12 +1,19 @@
 {
-  "name": "spotify-web-app",
+  "name": "beat-flow",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Beat Flow - music streaming app (Express + MongoDB + ImageKit + React)",
+  "main": "server.js",
   "scripts": {
-    "test": "node --test",
-    "dev": "npx nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "prestart": "node scripts/ensure-frontend.js",
+    "dev": "node scripts/dev.js",
+    "build": "npm --prefix frontend install --include=dev && npm --prefix frontend run build",
+    "client": "npm --prefix frontend run dev",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "backfill:covers": "node scripts/backfill-covers.js"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "keywords": [],
   "author": "",
@@ -16,11 +23,13 @@
     "@imagekit/nodejs": "^7.11.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
+    "compression": "^1.8.2",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.9.4",
-    "multer": "^2.4.0"
+    "multer": "^2.4.0",
+    "music-metadata": "^12.3.5"
   }
 }

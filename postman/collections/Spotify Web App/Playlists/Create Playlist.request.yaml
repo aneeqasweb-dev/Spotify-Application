@@ -1,0 +1,16 @@
+$kind: http-request
+name: Create Playlist
+order: 2000
+method: POST
+url: '{{baseUrl}}/api/playlists'
+description: Any logged-in user. Name is optional ("My Playlist #1" is used). Form-data with a "cover" image also works.
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Road Trip",
+      "description": "Songs for the open road"
+    }

@@ -1,0 +1,6 @@
+$kind: http-request
+name: Delete Music
+order: 7000
+method: DELETE
+url: '{{baseUrl}}/api/music/{{trackId}}'
+description: Artist only, your own songs. Also removes it from albums, playlists and likes.

@@ -1,0 +1,6 @@
+$kind: http-request
+name: Get Current User
+order: 3000
+method: GET
+url: '{{baseUrl}}/api/auth/me'
+description: Returns the logged-in user (uses the token cookie set by Login).

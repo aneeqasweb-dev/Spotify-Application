@@ -1,0 +1,16 @@
+$kind: http-request
+name: Update Music
+order: 6000
+method: PATCH
+url: '{{baseUrl}}/api/music/{{trackId}}'
+description: Artist only, your own songs. Send form-data with a "cover" image to change the picture.
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "title": "New title",
+      "genre": "Pop"
+    }

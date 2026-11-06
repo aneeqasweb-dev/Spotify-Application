@@ -1,0 +1,6 @@
+$kind: http-request
+name: Get Playlists
+order: 1000
+method: GET
+url: '{{baseUrl}}/api/playlists'
+description: Your playlists plus Beat Flow editorial playlists.
