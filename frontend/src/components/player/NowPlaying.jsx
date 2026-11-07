@@ -15,7 +15,7 @@ export default function NowPlaying() {
   const p = usePlayer()
   const { current: track, expanded, setExpanded, upNext, jumpTo, playFromQueue, isPlaying } = p
   const dialogRef = useRef(null)
-  const tint = useDominantColor(track?.coverUrl, track ? coverArt(track.id).colors[0] : '#2a5bd7')
+  const tint = useDominantColor(track?.coverUrl, track ? coverArt(track.id).colors[0] : '#7c3aed')
 
   useEffect(() => {
     if (!expanded) return undefined

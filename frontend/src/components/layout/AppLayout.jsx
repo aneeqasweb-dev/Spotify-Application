@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { usePlayer } from '../../context/PlayerContext'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 import NowPlaying from '../player/NowPlaying'
+import NowPlayingPanel from '../player/NowPlayingPanel'
 import PlayerBar from '../player/PlayerBar'
 import QueuePanel from '../player/QueuePanel'
 import MobileNav from './MobileNav'
@@ -13,6 +15,8 @@ export default function AppLayout() {
   const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
   const { queueOpen } = usePlayer()
+  // Wide screens: player + queue live in the right-hand panel. Smaller screens: player bar at the bottom.
+  const wide = useMediaQuery('(min-width: 1280px)')
 
   // New page → start at the top
   useEffect(() => {
@@ -20,16 +24,16 @@ export default function AppLayout() {
   }, [pathname])
 
   return (
-    <div className={`app-shell${queueOpen ? ' has-queue' : ''}`}>
+    <div className={`app-shell${wide ? ' is-wide' : ''}${!wide && queueOpen ? ' has-queue' : ''}`}>
       <Sidebar />
-      <main className="main" ref={mainRef} onScroll={(e) => setScrolled(e.currentTarget.scrollTop > 40)}>
+      <main className="main" ref={mainRef} onScroll={(e) => setScrolled(e.currentTarget.scrollTop > 20)}>
         <TopBar scrolled={scrolled} />
         <div className="page">
           <Outlet />
         </div>
       </main>
-      {queueOpen && <QueuePanel />}
-      <PlayerBar />
+      {wide ? <NowPlayingPanel /> : <PlayerBar />}
+      {!wide && queueOpen && <QueuePanel />}
       <MobileNav />
       <NowPlaying />
     </div>

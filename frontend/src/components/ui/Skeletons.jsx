@@ -12,16 +12,6 @@ export function CardSkeletons({ count = 6 }) {
   )
 }
 
-export function QuickSkeletons() {
-  return (
-    <div className="quick-grid" aria-hidden="true">
-      {Array.from({ length: 8 }, (_, i) => (
-        <div key={i} className="skeleton sk-quick" />
-      ))}
-    </div>
-  )
-}
-
 export function RowSkeletons({ count = 5 }) {
   return (
     <div className="sk-rows" aria-hidden="true">

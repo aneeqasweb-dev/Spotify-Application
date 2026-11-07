@@ -13,9 +13,10 @@ release albums.
 - Login page shows a live wall of album covers from the catalogue
 
 **Listening**
-- Home: quick picks, *Jump back in*, genre mixes *Made for you*, *Beat Flow picks*, new releases, trending songs, popular artists
+- Home: *Turn Up The Music* banner, *Recently Played* picture cards, *Browse by Mood* (Happy, Relax, Workout, Sleep, Love), genre mixes *Made for you*, *Beat Flow picks*, new releases, trending songs, popular artists
+- Light lavender & purple design: sidebar with Create Playlist / Liked Songs, top search bar, notifications bell and account menu
 - Famous artists (Justin Bieber, Dua Lipa, BLACKPINK, BTS, CKay, Rema, The Weeknd…) as **official 30-second previews** with real artwork, marked *Preview*, with "Listen on Apple Music" for the full song
-- Player: play/pause, next/previous, shuffle, repeat (all / one), seek, volume, full-screen *Now playing* view
+- Player: play/pause, next/previous, shuffle, repeat (all / one), seek, volume, a *Now Playing* panel with the queue on wide screens, and a full-screen view
 - **Queue**: "Add to queue" plays songs next, then the album/playlist continues; queue side panel
 - Resumes the last song where you left off; lock-screen / media-key controls with cover art
 - Space bar = play/pause

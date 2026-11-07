@@ -21,7 +21,7 @@ export default function LikedSongsPage() {
 
   return (
     <>
-      <PageWash color="#3b4fd8" strong />
+      <PageWash color="#7c3aed" strong />
       <CollectionHeader
         art={<LikedArt />}
         eyebrow="Playlist"

@@ -1,18 +1,18 @@
 import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { AudioLines, House, LibraryBig, Plus, Search } from 'lucide-react'
+import { AudioLines, Heart, House, LibraryBig, Plus, Search } from 'lucide-react'
 import { getErrorMessage } from '../../api/client'
 import { useAuth } from '../../context/AuthContext'
 import { useCollection } from '../../context/CollectionContext'
 import { useLibrary } from '../../context/LibraryContext'
 import { usePlayer } from '../../context/PlayerContext'
 import { useToast } from '../../context/ToastContext'
-import { plural } from '../../utils/format'
-import AlbumArt, { LikedArt } from '../music/AlbumArt'
+import AlbumArt from '../music/AlbumArt'
 import Cover from '../music/Cover'
 import Avatar from '../ui/Avatar'
 import Equalizer from '../ui/Equalizer'
 import { Logo } from '../ui/Logo'
+import UserMenu from './UserMenu'
 
 const FILTERS = [
   { id: 'playlists', label: 'Playlists' },
@@ -27,9 +27,7 @@ export default function Sidebar() {
   const { albums, artists } = useLibrary()
   const { likedTracks, playlists, createPlaylist } = useCollection()
   const { context, isPlaying } = usePlayer()
-  const [filter, setFilter] = useState(null) // null = everything
-
-  const show = (kind) => !filter || filter === kind
+  const [filter, setFilter] = useState('playlists')
   const playingId = isPlaying ? context?.id : null
 
   const newPlaylist = async () => {
@@ -44,36 +42,47 @@ export default function Sidebar() {
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-top">
-        <Link to="/" className="sidebar-logo" aria-label="Beat Flow home">
-          <Logo size={32} />
-        </Link>
-        <nav className="sidebar-nav" aria-label="Main">
-          <NavLink to="/" end>
-            <House /> Home
+      <Link to="/" className="sidebar-logo" aria-label="Beat Flow home">
+        <Logo size={44} />
+      </Link>
+
+      <nav className="sidebar-nav" aria-label="Main">
+        <NavLink to="/" end>
+          <House /> Home
+        </NavLink>
+        <NavLink to="/search">
+          <Search /> Search
+        </NavLink>
+        <NavLink to="/library">
+          <LibraryBig /> Your Library
+        </NavLink>
+        {isArtist && (
+          <NavLink to="/studio">
+            <AudioLines /> Artist Studio
           </NavLink>
-          <NavLink to="/search">
-            <Search /> Search
-          </NavLink>
-          {isArtist && (
-            <NavLink to="/studio">
-              <AudioLines /> Artist Studio
-            </NavLink>
-          )}
-        </nav>
+        )}
+      </nav>
+
+      <div className="sidebar-sep" />
+
+      <div className="sidebar-actions">
+        <button type="button" className="sidebar-action" onClick={newPlaylist}>
+          <span className="sidebar-action-icon is-plus">
+            <Plus />
+          </span>
+          Create Playlist
+        </button>
+        <NavLink to="/collection/tracks" className="sidebar-action">
+          <span className="sidebar-action-icon is-heart">
+            <Heart fill="currentColor" />
+          </span>
+          Liked Songs
+          {likedTracks.length > 0 && <span className="sidebar-count">{likedTracks.length}</span>}
+        </NavLink>
       </div>
 
-      <div className="sidebar-section">
-        <div className="sidebar-section-head">
-          <Link to="/library" className="sidebar-library-link">
-            <LibraryBig /> Your Library
-          </Link>
-          <button type="button" className="icon-btn" onClick={newPlaylist} title="Create playlist" aria-label="Create playlist">
-            <Plus />
-          </button>
-        </div>
-
-        <div className="sidebar-chips" role="tablist" aria-label="Filter your library">
+      <div className="sidebar-library">
+        <div className="sidebar-chips" role="tablist" aria-label="Your library">
           {FILTERS.map((f) => (
             <button
               key={f.id}
@@ -81,7 +90,7 @@ export default function Sidebar() {
               role="tab"
               aria-selected={filter === f.id}
               className={`chip chip-sm${filter === f.id ? ' is-active' : ''}`}
-              onClick={() => setFilter((cur) => (cur === f.id ? null : f.id))}
+              onClick={() => setFilter(f.id)}
             >
               {f.label}
             </button>
@@ -89,21 +98,10 @@ export default function Sidebar() {
         </div>
 
         <div className="sidebar-list">
-          {show('playlists') && (
-            <NavLink to="/collection/tracks" className="sidebar-item">
-              <LikedArt size={48} />
-              <span className="sidebar-item-text">
-                <span>Liked Songs</span>
-                <small>Playlist · {plural(likedTracks.length, 'song')}</small>
-              </span>
-              {playingId === 'liked' && <Equalizer />}
-            </NavLink>
-          )}
-
-          {show('playlists') &&
+          {filter === 'playlists' &&
             playlists.map((p) => (
               <NavLink key={p.id} to={`/playlist/${p.id}`} className="sidebar-item">
-                <AlbumArt album={p} size={48} placeholder />
+                <AlbumArt album={p} size={40} placeholder />
                 <span className="sidebar-item-text">
                   <span>{p.name}</span>
                   <small>Playlist · {p.madeBy}</small>
@@ -111,11 +109,10 @@ export default function Sidebar() {
                 {playingId === p.id && <Equalizer />}
               </NavLink>
             ))}
-
-          {show('albums') &&
+          {filter === 'albums' &&
             albums.map((album) => (
               <NavLink key={album.id} to={`/album/${album.id}`} className="sidebar-item">
-                <AlbumArt album={album} size={48} label={false} />
+                <AlbumArt album={album} size={40} label={false} />
                 <span className="sidebar-item-text">
                   <span>{album.title}</span>
                   <small>Album · {album.byline}</small>
@@ -123,14 +120,13 @@ export default function Sidebar() {
                 {playingId === album.id && <Equalizer />}
               </NavLink>
             ))}
-
-          {show('artists') &&
+          {filter === 'artists' &&
             artists.map((artist) => (
               <NavLink key={artist.slug} to={`/artist/${artist.slug}`} className="sidebar-item">
                 {artist.coverUrl ? (
-                  <Cover src={artist.coverUrl} seed={artist.slug} size={48} round />
+                  <Cover src={artist.coverUrl} seed={artist.slug} size={40} round />
                 ) : (
-                  <Avatar name={artist.name} seed={artist.slug} size="lg" />
+                  <Avatar name={artist.name} seed={artist.slug} size="md" />
                 )}
                 <span className="sidebar-item-text">
                   <span>{artist.name}</span>
@@ -140,6 +136,10 @@ export default function Sidebar() {
               </NavLink>
             ))}
         </div>
+      </div>
+
+      <div className="sidebar-user">
+        <UserMenu variant="chip" placement="up" />
       </div>
     </aside>
   )

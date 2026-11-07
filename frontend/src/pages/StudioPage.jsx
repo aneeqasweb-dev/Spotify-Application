@@ -70,7 +70,7 @@ export default function StudioPage() {
 
   return (
     <>
-      <PageWash color="#1f5fd0" />
+      <PageWash color="#a855f7" />
       <header className="page-header">
         <span className="eyebrow">Artist Studio</span>
         <h1 className="page-title">Share your sound</h1>

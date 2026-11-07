@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { rememberDuration } from '../hooks/useTrackDuration'
 import { imageUrl } from '../utils/cover'
+import { rememberContext } from '../utils/recentContexts'
 import { useAuth } from './AuthContext'
 import { useCollection } from './CollectionContext'
 import { useLibrary } from './LibraryContext'
@@ -272,8 +273,14 @@ export function PlayerProvider({ children }) {
     else audio.pause()
   }, [])
 
+  const userIdRef = useRef(null)
+  useEffect(() => {
+    userIdRef.current = user?.id ?? null
+  })
+
   const playTracks = useCallback((tracks, startIndex = 0, ctx = null) => {
     if (!tracks?.length) return
+    rememberContext(userIdRef.current, ctx) // for "Recently Played" on Home
     setQueue(tracks)
     setContext(ctx)
     setManualCurrent(null)

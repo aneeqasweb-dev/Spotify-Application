@@ -44,7 +44,7 @@ export default function LibraryPage() {
 
   return (
     <>
-      <PageWash color="#2a3fb0" />
+      <PageWash color="#7c3aed" />
       <header className="page-header">
         <h1 className="page-title">Your Library</h1>
         <p className="lede">

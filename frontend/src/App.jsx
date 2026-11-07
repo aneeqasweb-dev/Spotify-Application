@@ -14,6 +14,7 @@ import GenrePage from './pages/GenrePage'
 import HomePage from './pages/HomePage'
 import LibraryPage from './pages/LibraryPage'
 import LikedSongsPage from './pages/LikedSongsPage'
+import MoodPage from './pages/MoodPage'
 import NotFoundPage from './pages/NotFoundPage'
 import PlaylistPage from './pages/PlaylistPage'
 import SearchPage from './pages/SearchPage'
@@ -73,6 +74,7 @@ export default function App() {
             <Route path="artist/:slug" element={<ArtistPage />} />
             <Route path="playlist/:playlistId" element={<PlaylistPage />} />
             <Route path="genre/:slug" element={<GenrePage />} />
+            <Route path="mood/:slug" element={<MoodPage />} />
             <Route path="studio" element={<StudioPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

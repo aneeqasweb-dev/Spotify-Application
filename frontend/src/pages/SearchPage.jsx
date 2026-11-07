@@ -34,19 +34,20 @@ export default function SearchPage() {
   // The input keeps its own state so fast typing never drops letters.
   // The URL (?q=) follows along so searches can be shared / reloaded.
   const [q, setQ] = useState(urlQ)
-  const fromTyping = location.state?.fromTyping
+  // Which search box changed the URL ('page' = this one, 'topbar' = the one at the top)
+  const typedIn = location.state?.typedIn
   const [filter, setFilter] = useState('all')
   const { tracks, albums, artists, status, error, refresh } = useLibrary()
   const { playlists } = useCollection()
 
-  // Sync from the URL only when it changed from outside (e.g. clicking a link)
+  // Sync from the URL unless this box made the change (top bar typing, links, back button all count)
   useEffect(() => {
-    if (!fromTyping) setQ(urlQ)
-  }, [urlQ, fromTyping])
+    if (typedIn !== 'page') setQ(urlQ)
+  }, [urlQ, typedIn])
 
   const onType = (value) => {
     setQ(value)
-    setParams(value ? { q: value } : {}, { replace: true, state: { fromTyping: true } })
+    setParams(value ? { q: value } : {}, { replace: true, state: { typedIn: 'page' } })
   }
 
   const term = q.trim().toLowerCase()
@@ -65,7 +66,7 @@ export default function SearchPage() {
 
   return (
     <>
-      <PageWash color="#1f4fbf" />
+      <PageWash color="#8b5cf6" />
       <div className="search-box">
         <Search className="search-icon" />
         <input
